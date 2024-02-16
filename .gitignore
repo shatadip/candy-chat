@@ -1,0 +1,7 @@
+# Ignore node_modules in Client directory
+/Client/node_modules
+/Client/package-lock.json
+
+# Ignore node_modules in Server directory
+/Server/node_modules
+/Server/package-lock.json
