@@ -17,8 +17,15 @@ app.use(express.static('public'));
 const io = socket(expressServer);
 
 io.on('connection', (socket) => {
+
     console.log('New user connected', socket.id);
+
+    socket.on('chat', (data) => {
+      console.log('Received chat message:', data);
+        io.sockets.emit('chat', data);
+    });
+
+    socket.on('typing', (data) => {
+        socket.broadcast.emit('typing', data);
+    });
 });
-// socket.on('chat', (data) => {
-//     io.sockets.emit('chat', data);
-// });
