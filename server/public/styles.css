@@ -1,3 +1,5 @@
+/* /public/styles.css */
+
 body{
     font-family: 'Nunito';
 }
@@ -20,6 +22,10 @@ h2{
     height: 400px;
     overflow: auto;
     background: #f9f9f9;
+}
+
+#output {
+    overflow: auto;
 }
 
 #output p{

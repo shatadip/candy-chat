@@ -1,3 +1,5 @@
+// index.js (entry)
+
 const express = require('express');
 const socket = require('socket.io');
 
@@ -28,4 +30,9 @@ io.on('connection', (socket) => {
     socket.on('typing', (data) => {
         socket.broadcast.emit('typing', data);
     });
+
+    // Add 'stop typing' event listener
+    socket.on('stop typing', (data) => {
+      socket.broadcast.emit('stop typing', data);
+  });
 });
