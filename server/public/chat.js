@@ -1,4 +1,6 @@
 // /public/chat.js
+
+
 socket.on('connect', function () {
     console.log('Connected to server');
     let storedHandle = localStorage.getItem('handle');
@@ -6,7 +8,7 @@ socket.on('connect', function () {
         handle.value = storedHandle;
     } else {
         // Generate a unique handle and store it in localStorage
-        let uniqueHandle = generateHandle();
+        let uniqueHandle = uHandle;
         handle.value = uniqueHandle;
         localStorage.setItem('handle', uniqueHandle);
     }
@@ -15,6 +17,9 @@ socket.on('connect', function () {
     let storedMessages = localStorage.getItem('messages');
     if (storedMessages) {
         output.innerHTML = storedMessages;
+        setTimeout(() => {
+            output.scrollTop = output.scrollHeight;
+        }, 10);
     }
 });
 
@@ -58,9 +63,15 @@ function getRandomNumber() {
     return Math.floor(1000 + Math.random() * 9000);
 }
 
+function generateHandle() {
+    return `${getRandomCandy()}-${getRandomNumber()}`;
+}
+const uHandle=generateHandle();
+
+
 // Generate a unique handle and set it as the value of the handle input field
-const uniqueHandle = `${getRandomCandy()}-${getRandomNumber()}`;
-document.getElementById('handle').value = uniqueHandle;
+// const uniqueHandle = `${getRandomCandy()}-${getRandomNumber()}`;
+document.getElementById('handle').value = uHandle; //uniqueHandle;
 
 // Emit events
 
@@ -114,7 +125,7 @@ socket.on('chat', (data) => {
     // Use setTimeout to ensure that the new content is rendered before scrolling
     setTimeout(() => {
         output.scrollTop = output.scrollHeight;
-    }, 1000);
+    }, 10);
 });
 
 socket.on('typing', (data) => {
